@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<ul id="myLinks">
+    <li id="goSomewhere">Go somewhere</li>
+    <li id="doSomething">Do something</li>
+    <li id="sayHi">Say hi</li>
+</ul>
+
+<div>
+    这里的 HTML 包含 3 个列表项，在被点击时应该执行某个操作。对此，通常的做法是像这样指定 3 个事件处理程序:
+</div>
+
+<script !src="">
+    // const goE = document.getElementById("goSomewhere");
+    // const doE = document.getElementById("doSomething");
+    // const saE = document.getElementById("sayHi");
+    // goE.addEventListener("click",e => {
+    //     console.log("hello,go");
+    // })
+    //
+    // doE.addEventListener("click",event => {
+    //     console.log("hello do")
+    // })
+    //
+    // saE.addEventListener("click",event => {
+    //     console.log("hello sa")
+    // })
+    //
+
+</script>
+
+<p>
+    如果对页面中所有需要使用 onclick 事件处理程序的元素都如法炮制，结果就会出现大片雷同的 15 只为指定事件处理程序的代码。使用事件委托，只要给所有元素共同的祖先节点添加一个事件处理程序， 就可以解决问题。比如:
+</p>
+
+<script !src="">
+    document.getElementById("myLinks").addEventListener("click",e => {
+        switch (e.target.id){
+            case "goSomewhere":
+                console.log("hello,go");
+                break;
+            case "doSomething":
+                console.log("hi do");
+                break;
+            case "sayHi":
+                console.log("hi say");
+                break;
+            default:
+                break;
+        }
+    })
+</script>
+
+<p>
+    只要可行，就应该考虑只给 document 添加一个事件处理程序，通过它处理页面中所有某种类型的 事件。相对于之前的技术，事件委托具有如下优点。
+     document 对象随时可用，任何时候都可以给它添加事件处理程序(不用等待 DOMContentLoaded 或 load 事件)。这意味着只要页面渲染出可点击的元素，就可以无延迟地起作用。
+    节省花在设置页面事件处理程序上的时间。只指定一个事件处理程序既可以节省 DOM 引用，也 24 可以节省时间
+
+    减少整个页面所需的内存，提升整体性能
+
+    最适合使用事件委托的事件包括:click、mousedown、mouseup、keydown 和 keypress。 mouseover 和 mouseout 事件冒泡，但很难适当处理，且经常需要计算元素位置(因为 mouseout 会 在光标从一个元素移动到它的一个后代节点以及移出元素之外时触发)。
+
+</p>
+</body>
+</html>

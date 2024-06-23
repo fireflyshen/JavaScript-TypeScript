@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<iframe src="内嵌窗口.html" frameborder="0" id="myFrame">
+
+</iframe>
+
+<script>
+    let frame = document.getElementById("myFrame");
+
+    window.addEventListener("message", e => {
+        console.log("收到了发送的信息", e.data, e.origin)
+        e.source.postMessage("hello 内嵌窗口");
+    })
+
+    frame.onload = function (e) {
+        frame.contentWindow.postMessage("hello", "*")
+    }
+
+
+</script>
+</body>
+</html>

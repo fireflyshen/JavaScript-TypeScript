@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        html {
+            font-family: LxgwWenKaiGB-Regular;
+            font-size: 16px;
+        }
+
+        tip {
+            display: block;
+            background-color: rgba(72, 121, 181, 0.38);
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.95rem;
+            padding: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+    DOMActivate:元素被用户通过鼠标或键盘操作激活时触发(比 click 或 keydown 更通用)。 这个事件在 DOM3 Events 中已经废弃。因为浏览器实现之间存在差异，所以不要使用它。
+
+    load:在 window 上当页面加载完成后触发，在窗套(frameset)上当所有窗格(frame) 都加载完成后触发，在img元素上当图片加载完成后触发，在object元素上当相应对象加载完成后触发。
+
+    <h3>LOAD</h3>
+    <p>
+        load 事件可能是 JavaScript 中最常用的事件。
+        在 window 对象上，load 事件会在整个页面(包括所有外部资源如图片、JavaScript 文件和 CSS 文件)加载完成后触发。
+        可以通过两种方式指定 load 事件处理程序。第一种是 JavaScript 方式，
+    </p>
+    <pre>
+        <code>
+window.addEventListener("load",(e) => {
+    console.log(e.type);
+})
+        </code>
+    </pre>
+
+    <script>
+        window.addEventListener("load", (e) => {
+            console.log(e.type);
+        });
+    </script>
+
+    <p>
+        第二种指定 load 事件处理程序的方式是向元素添加 onload 属性
+    </p>
+    <pre>
+        <code>
+&lt;body onload="console.log('Loaded!')"&gt;&lt;/body&gt;
+        </code>
+    </pre>
+
+    <p>
+        一般来说，任何在 window 上发生的事件，都可以通过给&ltbody&gt元素上对应的属性赋值来指定， 这是因为 HTML 中没有 window 元素。
+        这实际上是为了保证向后兼容的一个策略，但在所有浏览器中都 能得到很好的支持。实际开发中要尽量使用 JavaScript 方式。
+    </p>
+
+
+    <tip>
+        图片上也会触发 load 事件，包括 DOM 中的图片和非 DOM 中的图片。可以在 HTML 中直接给&ltimg&gt 元素的 onload 属性指定事件处理程序，
+        <pre>
+            <code>
+&ltimg src="smile.gif" onload="console.log('Image loaded.')"&gt
+            </code>
+        </pre>
+
+        <img src="blush.png" alt="smile" onload="console.log('img is loaded');" />
+        <p>
+            这个例子会在图片加载完成后输出一条消息。同样，使用 JavaScript 也可以为图片指定事件处理程序:
+        </p>
+        <img src="blush.png" alt="smile" id="smile" />
+        <script>
+            const img = document.getElementById("smile");
+            img.onload = (e) => console.log("smile loaded")
+        </script>
+
+    </tip>
+
+
+    <h3>unload</h3>
+    <p>与 load 事件相对的是 unload 事件，unload 事件会在文档卸载完成后触发。unload 事件一般是 在从一个页面导航到另一个页面时触发，最常用于清理引用，以避免内存泄漏。与 load 事件类似， unload
+        事件处理程序也有两种指定方式。第一种是 JavaScript 方式，如下所示:</p>
+
+    <pre>
+        <code>
+window.addEventListener("unload", (event) => {
+    console.log("Unloaded!");
+})
+        </code>
+
+        <script>
+            window.addEventListener("unload", () => {
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+                console.log("unloaded");
+            })
+        </script>
+    </pre>
+    <p>
+        第二种方式与 load 事件类似，就是给&ltbody&gt元素添加 onunload 属性
+
+    <pre>
+            <code>
+&ltbody onunload="console.log('Unloaded!')"&gt;
+            </code>
+        </pre>
+    </p>
+
+
+    <h3>resize</h3>
+    <p>
+        当浏览器窗口被缩放到新高度或宽度时，会触发 resize 事件。这个事件在 window 上触发，因此 可以通过 JavaScript 在 window 上或者为&ltbody&gt元素添加 onresize
+        属性来指定事件处理程序。优先使 用 JavaScript 方式:
+    <pre>
+            <code>
+window.addeventlistener("resize",() => {
+    console.log("resized");
+})
+            </code>
+        </pre>
+
+    <tip>
+        不同浏览器在决定何时触发 resize 事件上存在重要差异。IE、Safari、Chrome 和 Opera 会在窗口 缩放超过1像素时触发resize事件，然后随着用户缩放浏览器窗口不断触发。Firefox早期版本则只在
+        23 用户停止缩放浏览器窗口时触发 resize 事件。无论如何，都应该避免在这个事件处理程序中执行过多 计算。否则可能由于执行过于频繁而导致浏览器响应明确变慢。
+    </tip>
+    </p>
+
+    <script>
+        window.addEventListener("resize", () => {
+            console.log("resized");
+        })
+    </script>
+
+    <h3>scroll</h3>
+
+    <p>
+        虽然 scroll 事件发生在 window 上，但实际上反映的是页面中相应元素的变化。在混杂模式下， 可以通过<body>元素检测 scrollLeft 和 scrollTop 属性的变化。而在标准模式下，这些变化在除 早期版的 Safari 之外的所有浏览器中都发生在<html>元素上(早期版的 Safari 在<body>上跟踪滚动位 置)。下面的代码演示了如何处理这些差异:
+        
+        <script>
+            window.addEventListener("scroll",() => {
+                console.log("scrolled");
+            })
+        </script>
+    </p>
+</body>
+
+</html>

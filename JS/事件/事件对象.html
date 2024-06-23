@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a {
+            display: block;
+            width: 7vw;
+            height: 3vh;
+            background-color: skyblue;
+            border-radius: 5px;
+            border: 1px gray solid;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: rgba(33, 128, 237, 0.746);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="myBtn">click me</button>
+
+
+    <script>
+        // document.body.onclick = function (event) {
+        //     console.log(event.currentTarget === document.body); // true 
+        //     console.log(this === document.body); // true 
+        //     console.log(event.target === document.getElementById("myBtn")); // true
+        // }
+    </script>
+
+    <a id="link">click me</a>
+
+    <script>
+        var a = document.getElementById("link");
+        a.addEventListener("click", (e) => {
+            // 阻止默认行为
+            e.preventDefault()
+            fetch("www.baidu.com").then((success) => {
+                console.log(success);
+            }, (err) => {
+                console.log(err, "@");
+            })
+        })
+    </script>
+
+    <!--阻止冒泡 -->
+    <div id="parent" onclick="pclick(event)">
+        parent
+        <button id="son">son</button>
+    </div>
+
+    <script>
+        const p = document.querySelector("#parent")
+        const s = document.querySelector("#son")
+
+        let pclick = function(e) {
+            console.log(e.eventPhase,"^");
+        }
+
+        s.onclick = (e) => {
+            console.log(e.eventPhase,"@"); 
+        }
+
+        document.body.addEventListener("click",(e) => {
+            console.log(e.eventPhase,"#");
+        },true)
+    </script>
+
+</body>
+
+</html>

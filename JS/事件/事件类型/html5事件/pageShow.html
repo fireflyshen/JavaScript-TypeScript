@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <a href="www.baidu.com">link</a>
+    </div>
+
+
+    <script>
+
+
+        (function () {
+            let showCount = 0;
+            window.addEventListener("load", () => {
+                console.log("Load fired");
+            });
+            window.addEventListener("pageshow", () => {
+                showCount++;
+                console.log(`Show has been fired ${showCount} times.`);
+            });
+        })();
+
+
+
+    </script>
+</body>
+
+</html>

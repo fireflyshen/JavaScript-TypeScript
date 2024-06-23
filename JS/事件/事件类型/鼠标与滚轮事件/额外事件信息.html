@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>额外事件信息</h3>
+    <div>
+        DOM2 Events 规范在 event 对象上提供了 detail 属性，以给出关于事件的更多信息。
+        对鼠标事件来说，detail包含一个数值，表示在给定位置上发生了多少次单击。
+        单击相当于在同一个像素上发生一次 mousedown 紧跟一次 mouseup。detail 的值从 1 开始，每次单击会加 1。
+        如果鼠标在 mousedown 和 mouseup 之间移动了，则 detail 会重置为 0。
+    </div>
+
+
+    <button id="btn">click me</button>
+    <script>
+
+        document.getElementById("btn").addEventListener("click",(e) => {
+            console.log(e.detail); 
+        })
+    </script>
+</body>
+</html>

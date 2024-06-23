@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>内嵌窗口</title>
+</head>
+<body>
+    <div>hello</div>
+
+<script>
+    window.onload = () => {
+        window.parent.postMessage("Initial message from Iframe", "*");
+    };
+
+
+    window.addEventListener("message",ev => {
+        console.log("收到了父窗口传递的信息",ev.data,ev.origin);
+    })
+</script>
+</body>
+</html>

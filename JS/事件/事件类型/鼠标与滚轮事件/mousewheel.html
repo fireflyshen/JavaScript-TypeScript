@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 700vh;
+        }
+    </style>
+</head>
+<body>
+    <h3>mousewheel 事件</h3>
+    <p>
+        这个事件会在任何元素上触发，并(在 IE8 中)冒泡到 document 和(在所有现代浏览器中)window。mousewheel 事件的 event 对象包含 鼠标事件的所有标准信息，此外还有一个名为 wheelDelta 的新属性。当鼠标滚轮向前滚动时， wheelDelta 每次都是+120;而当鼠标滚轮向后滚动时，wheelDelta 每次都是–120
+        可以为页面上的任何元素或文档添加 onmousewheel 事件处理程序，以处理所有鼠标滚轮交互。
+    </p>
+    <script>
+        document.body.addEventListener("wheel",(e) => {
+            console.log(e.wheelDelta);
+        })
+    </script>
+</body>
+</html>

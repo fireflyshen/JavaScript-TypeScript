@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 700vh;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        鼠标事件还有一个名为滚轮事件的子类别。滚轮事件只有一个事件 mousewheel，反映的是鼠标滚轮或带滚轮的类似设备上滚轮的交互。
+    </div>
+
+    <h3>
+        客户端坐标
+    </h3>
+
+    <div>鼠标事件都是在浏览器视口中的某个位置上发生的。这些信息被保存在event对象的clientX和clientY 属性中。这两个属性表示事件发生时鼠标光标在视口中的坐标，所有浏览器都支持</div>
+
+    <script>
+        document.body.addEventListener("mousewheel",(e) => {
+            // 客户端坐标
+            console.log(e.clientX);
+            console.log(e.clientY);
+            // 页面坐标
+            console.log(e.pageX,"@");
+            console.log(e.pageY,"@");
+            // 屏幕坐标
+            console.log(e.screenX,"%");
+            console.log(e.screenY,"%");
+            console.log("wheel trigger");
+        })
+    </script>
+
+
+    <h3>页面坐标</h3>
+    <div>
+        客户端坐标是事件发生时鼠标光标在客户端视口中的坐标，而页面坐标是事件发生时鼠标光标在页 面上的坐标，通过 event 对象的 pageX 和 pageY 可以获取。这两个属性表示鼠标光标在页面上的位置， 因此反映的是光标到页面而非视口左边与上边的距离
+    </div>
+
+</body>
+</html>

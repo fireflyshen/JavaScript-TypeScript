@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <p>
+            window 的 load 事件会在页面完全加载后触发，因为要等待很多外部资源加载完成，所以会花费 较长时间。而 DOMContentLoaded 事件会在 DOM
+            树构建完成后立即触发，而不用等待图片、JavaScript
+            文件、CSS 文件或其他资源加载完成。相对于 load 事件，DOMContentLoaded 可以让开发者在外部资 18 源下载的同时就能指定事件处理程序，从而让用户能够更快地与页面交互。
+            17.4 事件类型 525
+            要处理 DOMContentLoaded 事件，需要给 document 或 window 添加事件处理程序(实际的事件 目标是 document，但会冒泡到 window)。下面是一个在 document 上监听
+            DOMContentLoaded 事件 的例子:
+        </p>
+    </div>
+
+
+    <script>
+        window.addEventListener("load", e => console.log("src & page loaded"))
+        window.addEventListener("DOMContentLoaded", e => console.log("page loaded"))
+    </script>
+</body>
+
+</html>

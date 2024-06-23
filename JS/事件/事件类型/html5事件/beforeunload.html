@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>beforeunload</h3>
+    <p>
+        beforeunload 事件会在 window 上触发，用意是给开发者提供阻止页面被卸载的机会。这个事件
+会在页面即将从浏览器中卸载时触发，如果页面需要继续使用，则可以不被卸载。这个事件不能取消， 否则就意味着可以把用户永久阻拦在一个页面上。相反，这个事件会向用户显示一个确认框，其中的消 息表明浏览器即将卸载页面，并请用户确认是希望关闭页面，还是继续留在页面上(见图 17-8)
+    </p>
+
+
+    <script>
+        window.addEventListener("beforeunload",(e) => {
+            let message = "I'm really going to miss you if you go."; 
+            e.returnValue = message;
+            return message;
+        })
+    </script>
+</body>
+</html>

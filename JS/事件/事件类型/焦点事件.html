@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        html {
+            font-family: LxgwWenKaiGB-Regular;
+            font-size: 16px;
+        }
+
+        tip {
+            display: block;
+            background-color: rgba(72, 121, 181, 0.38);
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.95rem;
+            padding: 20px;
+
+        }
+
+        #event {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #event li::before {
+            /* background-color: skyblue; */
+            content: '';
+            display: inline-block;
+            width: 0.8rem;
+            height: 0.8rem;
+            background: url("art.png");
+            background-size: 13px;
+            margin-right: .2rem;
+
+        }
+    </style>
+</head>
+
+<body>
+    焦点事件在页面元素获得或失去焦点时触发。这些事件可以与 document.hasFocus()和 document.activeElement 一起为开发者提供用户在页面中导航的信息。焦点事件有以下 6 种。
+    <br>
+    <ul id="event">
+        <li>:blur:当元素失去焦点时触发。这个事件不冒泡，所有浏览器都支持</li>
+        <li>:DOMFocusIn:当元素获得焦点时触发。这个事件是 focus 的冒泡版。Opera 是唯一支持这个事
+            件的主流浏览器。DOM3 Events 废弃了 DOMFocusIn，推荐 focusin。
+        </li>
+        <li>:DOMFocusOut:当元素失去焦点时触发。这个事件是 blur 的通用版。Opera 是唯一支持这个事
+            件的主流浏览器。DOM3 Events 废弃了 DOMFocusOut，推荐 focusout。</li>
+        <li>:focus:当元素获得焦点时触发。这个事件不冒泡，所有浏览器都支持。</li>
+        <li>:focusin:当元素获得焦点时触发。这个事件是 focus 的冒泡版。</li>
+        <li>:focusout:当元素失去焦点时触发。这个事件是 blur 的通用版。</li>
+    </ul>
+
+    <h3>Blur</h3>
+    <p>
+        整个页面失去焦点
+    <pre>
+            <code>
+window.addEventListener("blur", () => {
+    console.log("blured");
+})</code>
+        </pre>
+
+    这个事件不会冒泡
+    <div id="testdiv">
+        test
+        <input type="text" id="testinput">
+    </div>
+
+    <script>
+        document.querySelector("#testdiv").addEventListener("blur", () => {
+            console.log("div blured");
+        })
+        document.querySelector("#testinput").addEventListener("blur", () => {
+            console.log("input blured");
+        })
+    </script>
+    </p>
+    <script>
+        window.addEventListener("blur", () => {
+            console.log("blured");
+        })
+    </script>
+
+    <h3>focus</h3>
+    <p>
+        当元素获得焦点时触发。这个事件不冒泡，所有浏览器都支持。
+        <input type="text" id="testinput2">
+        <script>
+            document.querySelector("#testinput2").addEventListener("focus", (e) => {
+                console.log("input focus");
+            })
+        </script>
+    <pre><code>
+document.querySelector("#testinput").addEventListener("focus",(e) => {
+    console.log("input focus");
+}) 
+        </code></pre>
+    </p>
+    <hr>
+    <h3>focusin</h3>
+    <p>
+        当元素获得焦点时触发。这个事件是 focus 的冒泡版
+    <div id="testdiv2">
+        <input type="text" id="testinput3" />
+    </div>
+
+    <script>
+        document.querySelector("#testdiv2").addEventListener("focusin", () => {
+            console.log("div focus");
+        })
+
+        document.querySelector("#testinput3").addEventListener("focusin", () => {
+            console.log("input");
+        })
+    </script>
+    </p>
+
+    <hr>
+
+    <h3>focusout</h3>
+    <p>
+        当元素获得焦点时触发。这个事件是 focus 的冒泡版
+    <div id="testdiv3">
+        <input type="text" id="testinput4" />
+    </div>
+
+    <script>
+        document.querySelector("#testdiv3").addEventListener("focusout", () => {
+            console.log("div focusout");
+        })
+
+        document.querySelector("#testinput4").addEventListener("focusout", () => {
+            console.log("input focusout");
+        })
+    </script>
+    </p>
+
+
+    <h3>当焦点从页面中的一个元素移到另一个元素上时，会依次发生如下事件。</h3>
+    <ol>
+        <li>focuscout 在失去焦点的元素上触发。</li>
+        <li>focusin 在获得焦点的元素上触发。</li>
+        <li>blur 在失去焦点的元素上触发。</li>
+        <li>DOMFocusOut 在失去焦点的元素上触发。</li>
+        <li>focus 在获得焦点的元素上触发。</li>
+        <li>DOMFocusIn 在获得焦点的元素上触发。</li>
+    </ol>
+</body>
+
+</html>

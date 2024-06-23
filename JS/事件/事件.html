@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+
+<body>
+
+    <!-- 事件冒泡 -->
+    <div class="container"><button class="btn">click me</button></div>
+    <script>
+        var div = document.querySelector(".container");
+
+        var btn = document.querySelector(".btn");
+
+        btn.addEventListener("click", (e) => {
+            alert("hello world");
+            // e.preventDefault();
+            e.stopPropagation()
+        })
+
+        div.addEventListener("click", () => {
+            alert("hello div")
+        })
+    </script>
+
+    <!-- 静态绑定 -->
+    <div onclick="(function(){console.log(event);})()">click me2</div>
+
+    <div value="click me div" onclick="console.log(this.value);">click me</div>
+
+    <button value="click me button" onclick="console.log(this.value);">click me</button>
+
+    <button value="hello button" onclick="console.log(value)">click me</button>
+
+    <form method="post">
+        <input type="text" name="username" value="">
+        <input type="button" value="Echo Username" onclick="console.log(username.value)">
+    </form>
+
+
+
+    <!-- 动态绑定事件 又称为DOM0 事件处理程序-->
+
+    <button id="btn1" value="hello">click me</button>
+    <script>
+        var btn = document.getElementById("btn1");
+        btn.onclick = function(e){
+            console.log(e);
+            console.log(this.value)
+        }
+    </script>
+
+
+    <!-- DOM0 事件处理程序 -->
+    <!-- DOM2 Events 为事件处理程序的赋值和移除定义了两个方法:addEventListener()和 remove- EventListener()。这两个方法暴露在所有 DOM 节点上，它们接收 3 个参数:事件名、事件处理函 数和一个布尔值，true 表示在捕获阶段调用事件处理程序，false(默认值)表示在冒泡阶段调用事 件处理程序。 -->
+     <button id="btn2" value="hi">click me</button>
+     <script>
+        var element = document.getElementById("btn2")
+        element.addEventListener("click",(e) => {
+            console.log(this);
+            console.log(e);
+        },false)
+     </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html {
+            font-size: 20px;
+        }
+
+        #custommenu {
+            position: absolute;
+            /* display: none; */
+            visibility: hidden;
+            width: 10vw;
+            border: 1px solid #d2d2d2;
+            border-radius: .3rem;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            background-color: #ececec;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 3px;
+        }
+
+        li {
+            position: relative;
+            box-sizing: border-box;
+            font-size: .5rem;
+            padding: 3px 4px;
+            z-index: 0;
+        }
+
+        li a {
+            display: block;
+            text-decoration: none;
+            color: black;
+            /* border-bottom: 1px gray solid; */
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            padding: 4px;
+            border-radius: .3rem;
+            line-height: .5rem;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        li a::before {
+            display: block;
+            content: '';
+            position: absolute; /* 改为 absolute */
+            height: 1px;
+            background-color: gray;
+            left: 0;
+            right: 0;
+            top: -1px; /* 根据需要调整这个值 */
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        li:first-child a::before {
+            display: none;
+        }
+
+        li a:hover {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>contextmenu</h3>
+
+    <div id="custommenu">
+        <ul>
+            <li><a href="#">item1</a></li>
+            <li><a href="#">item2</a></li>
+            <li><a href="#">item3</a></li>
+        </ul>
+    </div>
+    <script>
+        const custommenu = document.getElementById("custommenu");
+        window.addEventListener("contextmenu", e => {
+            e.preventDefault();
+            custommenu.style.visibility = "visible";
+            custommenu.style.top = `${e.clientY}px`;
+            let left = e.clientX;
+            const a = custommenu.offsetWidth; 
+            const w = window.innerWidth;
+            if(left + a > w){
+                left = w - a;
+            }
+
+            custommenu.style.left = left + "px"
+        })
+
+        window.addEventListener("click",e=>{
+            custommenu.style.visibility = "hidden";
+        })
+    </script>
+</body>
+
+</html>

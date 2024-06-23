@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "target": "ES6", // 或者更高版本
+      "lib": ["ES2023", "dom"]
+    }
+  }
+  

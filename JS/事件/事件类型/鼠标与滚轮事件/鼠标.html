@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet" />
+    <!-- 引入 Prism.js 的 JavaScript 文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-html.min.js"></script>
+    <style>
+        pre {
+            /* background-color: #f5f5f5; */
+            padding: 10px;
+            overflow-x: auto;
+            /* width: 100%; */
+        }
+
+        html {
+            font-family: LxgwWenKaiGB-Regular;
+            font-size: 16px;
+        }
+
+        tip {
+            display: block;
+            background-color: rgba(72, 121, 181, 0.38);
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.95rem;
+            padding: 20px;
+
+        }
+
+        #event {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #event li::before {
+            /* background-color: skyblue; */
+            content: '';
+            display: inline-block;
+            width: 0.8rem;
+            height: 0.8rem;
+            background: url("./art.png");
+            background-size: 13px;
+            margin-right: .2rem;
+
+        }
+    </style>
+</head>
+
+<body>
+    焦点事件在页面元素获得或失去焦点时触发。这些事件可以与 document.hasFocus()和 document.activeElement 一起为开发者提供用户在页面中导航的信息。焦点事件有以下 6 种。
+    <br>
+    <ul id="event">
+        <li>click:在用户单击鼠标主键(通常是左键)或按键盘回车键时触发。这主要是基于无障碍的考虑，让键盘和鼠标都可以触发 onclick 事件处理程序。</li>
+        <li>dblclick:在用户双击鼠标主键(通常是左键)时触发。这个事件不是在 DOM2 Events 中定义 的，但得到了很好的支持，DOM3 Events 将其进行了标准化。</li>
+        <li>mousedown:在用户按下任意鼠标键时触发。这个事件不能通过键盘触发。</li>
+        <li>mouseenter:在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不冒泡，也不会在 光标经过后代元素时触发。mouseenter 事件不是在 DOM2 Events 中定义的，而是 DOM3 Events
+            中新增的事件</li>
+        <li>mouseleave:在用户把鼠标光标从元素内部移到元素外部时触发。这个事件不冒泡，也不会在 光标经过后代元素时触发。mouseleave 事件不是在 DOM2 Events 中定义的，而是 DOM3 Events
+            中新增的事件。</li>
+        <li>mousemove:在鼠标光标在元素上移动时反复触发。这个事件不能通过键盘触发。</li>
+        <li>mouseout:在用户把鼠标光标从一个元素移到另一个元素上时触发。移到的元素可以是原始元素的外部元素，也可以是原始元素的子元素。这个事件不能通过键盘触发。</li>
+        <li>mouseover:在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不能通过键盘触发。</li>
+        <li>mouseup:在用户释放鼠标键时触发。这个事件不能通过键盘触发。</li>
+    </ul>
+
+    <h3>click</h3>
+    <p>
+        click:在用户单击鼠标主键(通常是左键)或按键盘回车键时触发。这主要是基于无障碍的考虑，让键盘和鼠标都可以触发 onclick 事件处理程序。
+        <button id="btn1">click me</button>
+    <p>
+        如果要想使用回车出发，那么绑定点击事件的元素必须先获得焦点，也就是触发focus事件
+    </p>
+    <script>
+        document.querySelector("#btn1").addEventListener("focus", () => {
+            console.log("hello world focus!");
+        })
+        document.querySelector("#btn1").addEventListener("click", () => {
+            console.log("hello world!");
+        })
+    </script>
+    <pre>
+            <code class="language-javascript">
+document.querySelector("#btn1").addEventListener("focus",() => {
+    console.log("hello world focus!");
+}) 
+document.querySelector("#btn1").addEventListener("click",() => {
+    console.log("hello world!");
+})
+            </code>
+        </pre>
+    </p>
+
+    <hr>
+    <h3>dblclick</h3>
+    <p>
+        在用户双击鼠标主键(通常是左键)时触发。这个事件不是在 DOM2 Events 中定义 的，但得到了很好的支持，DOM3 Events 将其进行了标准化
+
+        <button ondblclick="console.log('double click');">click me double</button>
+
+    <pre><code class="language-html">
+&ltbutton ondblclick="console.log('double click');"&gtclick me double&lt/button&gt 
+        </code></pre>
+    </p>
+
+    <hr>
+    <h3>mousedown</h3>
+    <p>
+        在用户按下任意鼠标键时触发。这个事件不能通过键盘触发
+        <button onmousedown="console.log('mousedown!!!');">clikc me with any mouse key</button>
+    <pre><code class="language-html">
+&ltbutton onmousedown="console.log('double click');"&gtclikc me with any mouse key&lt/button&gt 
+        </code></pre>
+    </p>
+
+
+    <h3>mouseenter</h3>
+    <p>
+        在用户把鼠标光标从元素外部移到元素内部时触发。这个事件不冒泡，也不会在 光标经过后代元素时触发。mouseenter 事件不是在 DOM2 Events 中定义的，而是 DOM3 Events 中新增的事件ƒ
+    <div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;"
+        onmouseenter="console.log('hello div');">
+        容器
+    </div>
+
+    <pre><code class="language-html">
+&lt;div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;" onmouseenter="console.log('hello div');"&gt;
+    容器
+&lt;/div&gt;
+        </code></pre>
+    </p>
+
+    <hr>
+
+    <h3>mouseleave</h3>
+    <p>
+        在用户把鼠标光标从元素内部移到元素外部时触发。这个事件不冒泡，也不会在 光标经过后代元素时触发。mouseleave 事件不是在 DOM2 Events 中定义的，而是 DOM3 Events 中新增的事件。
+    <div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;"
+        onmouseleave="console.log('hello div leave');">
+        容器
+    </div>
+    <pre><code class="language-html">
+&lt;div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;" onmouseenter="console.log('hello div');"&gt;
+    容器
+&lt;/div&gt;
+    </code></pre>
+    </p>
+
+    <hr>
+    <h3>mousemove</h3>
+    <p>
+        在鼠标光标在元素上移动时反复触发。这个事件不能通过键盘触发
+    <div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;"
+        onmousemove="console.log('hello div');">
+        容器
+
+    </div>
+    <pre><code class="language-html">
+&lt;div style="width: 10vw;height: 10vh; background-color: azure; text-align: center; line-height: 10vh;" onmousemove="console.log('hello div');"&gt;
+    容器
+&lt;/div&gt;
+    </code></pre>
+    </p>
+
+
+    <h3>mouseup</h3>
+
+    <p>
+        在用户释放鼠标键时触发。这个事件不能通过键盘触发
+
+        <button onmouseup="console.log('hello');">click me</button>
+
+        <pre><code class="language-html">
+&ltbutton onmouseup="console.log('hello');"&gtclick me&lt/button&gt
+        </code></pre>
+    </p>
+
+
+    <button value="hello" id="testbtn7">hello</button>
+    <div value="hi" id="testdiv7">hiiiiii</div>
+
+    <script>
+        document.querySelector("#testbtn7").onclick = function (params) {
+            console.log(this.value);
+        }
+
+        document.querySelector("#testdiv7").onclick = function (params) {
+            console.log(this.value);
+        }
+    </script>
+</body>
+
+</html>

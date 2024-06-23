@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>keydown，用户按下键盘上某个键时触发，而且持续按住会重复触发。</li>
+        <li>keypress，用户按下键盘上某个键并产生字符时触发，而且持续按住会重复触发。Esc 键也会
+            触发这个事件。DOM3 Events 废弃了 keypress 事件，而推荐 textInput 事件</li>
+        <li> keyup，用户释放键盘上某个键时触发</li>
+    </ul>
+
+    <p>
+        输入事件只有一个，即 textInput。这个事件是对 keypress 事件的扩展，用于在文本显示给用户之前更方便地截获文本输入。
+        textInput 会在文本被插入到文本框之前触发。 
+        当用户按下键盘上的某个字符键时，首先会触发 keydown 事件，然后触发 keypress 事件，最后 触发 keyup 事件。
+        注意，这里keydown 和 keypress 事件会在文本框出现变化之前触发，而 keyup 事件会在文本框出现变化之后触发。
+        如果一个字符键被按住不放，keydown 和 keypress 就会重复触发，直到这个键被释放。
+    </p>
+
+    <h3>键码</h3>
+
+    <p>
+        对于 keydown 和 keyup 事件，event 对象的 keyCode 属性中会保存一个键码，对应键盘上特定 的一个键。
+        对于字母和数字键，keyCode 的值与小写字母和数字的 ASCII 编码一致。比如数字 7 键的 keyCode 为 55，而字母 A 键的 keyCode 为 65，
+        而且跟是否按了 Shift 键无关。DOM 和 IE 的 event 对 象都支持 keyCode 属性。下面这个例子展示了如何使用 keyCode 属性:
+
+        <input type="text" id="myinput">
+
+        <script>
+            const element = document.getElementById("myinput")
+
+            element.addEventListener("keyup",(e)=>{
+                console.log(e.keyCode);
+            })
+
+            element.addEventListener("textInput",(e) => {
+                console.log("aa");
+                console.log(e.inputMethod);
+            })
+        </script>
+    </p>
+
+
+</body>
+
+</html>

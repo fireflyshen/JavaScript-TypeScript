@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #myDiv {
+            width: 7vw;
+            height: 7vh;
+            background-color: azure;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>修饰键</h3>
+    <p>
+        键盘上的修饰键 Shift、Ctrl、Alt 和 Meta 经常用于修改鼠标事件的行为。DOM 规定了 4 个属性来表 示这几个修饰键的状态:shiftKey、ctrlKey、altKey 和
+        metaKey。这几属性会在各自对应的修饰 键被按下时包含布尔值 true，没有被按下时包含 false。在鼠标事件发生的，可以通过这几个属性来 检测修饰键是否被按下。
+    </p>
+    <div id="myDiv">
+
+    </div>
+
+    <script>
+        let div = document.getElementById("myDiv");
+        div.addEventListener("click", (event) => {
+            let keys = new Array();
+            if (event.shiftKey) {
+                keys.push("shift");
+            }
+            if (event.ctrlKey) {
+                keys.push("ctrl");
+            }
+            if (event.altKey) {
+                keys.push("alt");
+            }
+            if (event.metaKey) {
+                keys.push("meta");
+            }
+            console.log("Keys: " + keys.join(","));
+        });
+    </script>
+</body>
+
+</html>
