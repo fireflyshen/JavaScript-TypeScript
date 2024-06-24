@@ -20,3 +20,50 @@ console.log(s3); // Symbol()
 let s4 = Symbol();
 var s4ForObj = new Object(s4)
 console.log(typeof s4ForObj); // object
+
+// 全局对象
+// 如果要使用同一个Symbol可以使用全局对象参照表
+const s5 = Symbol.for("foo");
+const s6 = Symbol.for('foo');
+console.log(s5 === s6); // true  
+
+// 也可以通过keyFor拿到一个Symbol的描述
+const des = Symbol.keyFor(s5)
+console.log(des); // foo
+
+// 符号是可以作为属性的
+let s7 = Symbol('bar');
+let obj = {
+    [s7] : "hello world",
+}
+
+
+console.log(obj);
+// 访问
+console.log(obj[s7]);
+let s8 = Symbol('baz')
+Object.defineProperty(obj,s8,{
+    value:"hi world",
+    writable:true,
+    enumerable:true,
+    configurable:true
+})
+
+
+console.log(obj);
+
+var ownPropertyNames = Object.getOwnPropertyNames(obj);
+console.log(ownPropertyNames);
+var ownPropertySymbols = Object.getOwnPropertySymbols(obj);
+console.log(ownPropertySymbols);
+
+
+// 如果没有显式生命Symbol那么实际上是没有办法直接拿到的如下
+Object.defineProperty(obj,Symbol("quz"),{
+    value:"hello",
+    writable:true,
+    enumerable:true
+})
+
+let s9 = Object.getOwnPropertySymbols(obj).find(e => e.toString().match(/quz/));
+console.log(s9);

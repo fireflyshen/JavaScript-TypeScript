@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.7.2/axios.js"></script>
+    <style>
+        #todo {
+            width: 30vw;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+        #c {
+            transform: scale(1.5);
+            margin-right: 7px;
+        }
+
+        #title {
+
+        }
+    </style>
+  </head>
+  <body>
+    <!-- <script src="内置符号.js"></script> -->
+    <div id="todo">
+      <input type="checkbox" name="" id="c" />
+      <div id="title"></div>
+    </div>
+
+    <button>click me send a request</button>
+
+    <script>
+      window.onload = function () {
+        let d = axios({
+          method: "get",
+          url: "https://jsonplaceholder.typicode.com/todos/1",
+          responseType: "json",
+        });
+        const r = d
+          .then((result) => {
+            // let d2 = JSON.parse(result.data);
+            var t = document.getElementById("title");
+            var ch = document.getElementById("c");
+            ch.checked = result.completed;
+            t.innerHTML = result.data.title;
+            return;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      };
+    </script>
+  </body>
+</html>
