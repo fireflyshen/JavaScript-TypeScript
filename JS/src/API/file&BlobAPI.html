@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!--  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" name="" id="file" />
+    <div id="progress"></div>
+    <div id="content"></div>
+    <script>
+      document
+        .querySelector("input[id=file]")
+        .addEventListener("change", (e) => {
+          console.log("hello");
+          let info = "",
+            files = e.target.files,
+            type = "default",
+            reader = new FileReader(),
+            progress = document.getElementById("progress"),
+            content = document.getElementById("content");
+
+
+          reader.onprogress = function (event) {
+            if (event.lengthComputable) {
+              progress.innerHTML = `${event.loaded}/${event.total}`;
+            }
+          };
+
+          reader.onload = function (event) {
+            content.innerHTML = event.target.result;
+          }
+
+        //   reader.readAsText(files[0])
+
+          reader.readAsArrayBuffer(file[0])
+
+        });
+    </script>
+  </body>
+</html>

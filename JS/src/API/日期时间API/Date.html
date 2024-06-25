@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function foo(){
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+            console.log("hello");
+        }
+
+
+        var d1 = Date.now();
+        foo();
+        var d2 = Date.now();
+        console.log(d2-d1);
+
+
+        var d3 = performance.now()
+        foo()
+        var d4 = performance.now()
+        console.log(d4-d3);
+
+
+        // duration是0Date.now( )只有毫秒级精度，如果foo()执行足够快，则两个时间戳的值会相等。
+        // duration 是负值或极大值。如果在 foo()执行时，系统时钟被向后或向前调整了(如切换到夏令时)，则捕获的时间戳不会考虑这种情况，因此时间差中会包含这些调整。
+        // 为此，必须使用不同的计时 API 来精确且准确地度量时间的流逝。High Resolution Time API 定义了 window.performance.now()，这个方法返回一个微秒精度的浮点值。因此，使用这个方法先后捕获的时间戳更不可能出现相等的情况。而且这个方法可以保证时间戳单调增长。
+
+
+
+    </script>
+</body>
+</html>

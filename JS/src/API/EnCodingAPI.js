@@ -8,3 +8,4 @@ uint8Array.forEach(e => console.log(e));
 var textDecoder = new TextDecoder();
 var s = textDecoder.decode(uint8Array);
 console.log(s)
+// 还有一个流编码没说

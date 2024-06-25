@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications API Example</title>
+</head>
+<body>
+    <button id="notify-btn">Show Notification</button>
+    
+    <script>
+        document.getElementById("notify-btn").addEventListener("click", () => {
+            // 检查浏览器是否支持 Notifications API
+            if (!("Notification" in window)) {
+                alert("This browser does not support desktop notifications.");
+                return;
+            }
+
+            // 请求通知权限
+            Notification.requestPermission().then((permission) => {
+                console.log("User responded to permission request:", permission);
+
+                // 如果权限被授予，则显示通知
+                if (permission === "granted") {
+                    let n = new Notification("hello", {
+                        body: "你好",
+                        icon: 'https://via.placeholder.com/128' // 可选的图标URL
+                    });
+                } else {
+                    alert("Notification permission denied.");
+                }
+            }).catch(error => {
+                console.error("Permission request error:", error);
+            });
+        });
+    </script>
+</body>
+</html>
