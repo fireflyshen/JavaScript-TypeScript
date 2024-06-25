@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    disabled:布尔值，表示表单字段是否禁用。
+    form:指针，指向表单字段所属的表单。这个属性是只读的。
+    name:字符串，这个字段的名字。
+    readOnly:布尔值，表示这个字段是否只读。
+    tabIndex:数值，表示这个字段在按 Tab 键时的切换顺序。
+    type:字符串，表示字段类型，如"checkbox"、"radio"等。
+    value:要提交给服务器的字段值。对文件输入字段来说，这个属性是只读的，仅包含计算机上
+
+    <form action="#">
+        <!-- 表单字段禁用 -->
+        <input type="text" name="hello" id="input1">
+
+    </form>
+
+    <script>
+        // disabled:布尔值，表示表单字段是否禁用。 
+        document.getElementById("input1").disabled = true;
+        // form:指针，指向表单字段所属的表单。这个属性是只读的。 
+        console.log(document.getElementById("input1").form)
+        // name:字符串，这个字段的名字。
+        console.log(document.getElementById("input1").name); 
+
+        console.log(document.getElementById("input1").readOnly);
+        console.log(document.getElementById("input1").type)
+        // 甚至可以修改这个type,
+        document.getElementById("input1").type = "checkbox"
+
+    </script>
+</body>
+</html>

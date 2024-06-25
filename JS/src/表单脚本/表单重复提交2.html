@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Subsequent Form Submissions</title>
+    <script>
+        let isSubmitting = false;
+
+        function handleSubmit(event) {
+            if (isSubmitting) {
+                event.preventDefault(); // 阻止表单的默认提交行为
+                return;
+            }
+
+            isSubmitting = true;
+            // 模拟提交表单的操作
+            setTimeout(() => {
+                alert('Form submitted!');
+                isSubmitting = false; // 重置提交状态
+            }, 2000); // 模拟服务器响应时间
+        }
+    </script>
+</head>
+<body>
+    <form id="myForm" onsubmit="handleSubmit(event)">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

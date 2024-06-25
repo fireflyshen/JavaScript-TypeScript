@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+    <div>
+        hello
+    </div>
+
+    <input type="text">
+
+
+    <script>
+        window.addEventListener("beforecopy",e => {
+            console.log(e.target)
+        })
+
+        window.addEventListener("copy",e => {
+
+            console.log("hello copy")
+        })
+
+        window.addEventListener("beforecut",e => {
+            console.log("hello cut")
+        })
+
+        window.addEventListener("cut",e => {
+            // 获取剪切板上的数据
+            var cli = e.clipboardData || window.clipboardData
+            console.log(cli.getData("text"))
+            console.log("hello cut!!!!")
+        })
+
+        window.addEventListener("paste", e=> {
+            console.log("beforepaste")
+        })
+
+        window.addEventListener("beforepaste",e => {
+            console.log("beforepaste!!!")
+        })
+    </script>
 </body>
 </html>

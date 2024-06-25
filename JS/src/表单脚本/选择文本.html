@@ -1,0 +1,41 @@
+<!-- 两种文本框都支持一个名为 select()的方法，此方法用于全部选中文本框中的文本。大多数浏览 器会在调用 select()方法后自动将焦点设置到文本框(Opera 例外)。这个方法不接收参数，可以在任 何时候调用。下面来看一个例子: -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" />
+    <button>选中所有</button>
+    <button id="btn">取得选中数据</button>
+
+    <script>
+        document.getElementsByTagName("button")[0].onclick = function(){
+            document.querySelector("input[type=text]").select();
+        }
+
+        // 在文本框获得焦点时选中所有文本是非常常见的，特别是在文本框有默认值的情况下。这样做的出 发点是让用户能够一次性删除所有默认内容。可以通过以下代码来实现:
+        document.querySelector("input[type=text]").addEventListener("focus",e=>{
+            e.target.select()
+        })
+
+
+        // 与select()方法相对，还有一个select事件。当选中文本框中的文本时，会触发select事件。 这个事件确切的触发时机因浏览器而异。在 IE9+、Opera、Firefox、Chrome 和 Safari 中，select 事件 会在用户选择完文本后立即触发;在 IE8 及更早版本中，则会在第一个字符被选中时触发。另外，调用 select()方法也会触发 select 事件。下面来看一个例子:
+        document.querySelector("input[type=text]").addEventListener("select",e=>{
+            console.log("selected");
+        })
+
+        // 取得选中的文本
+        let i = document.querySelector("input[type=text]")
+
+        function getSelectedText(f){
+            f.value.substring(f.selectionStart,f.selectionEnd)
+        }
+
+        
+    </script>
+  </body>
+</html>

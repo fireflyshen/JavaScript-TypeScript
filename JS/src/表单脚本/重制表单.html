@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="myform">
+        <input type="text" placeholder="hello">
+
+        <button type="reset">reset</button>
+        <input type="reset" value="reset">
+        <button id="resetBtn">plain button</button>
+    </form>
+
+    <script>
+        // 手动重制
+        var forms = document.forms;
+        var n = document.querySelector("button[id=resetBtn]")
+        n.onclick = e => document.forms[0].reset();
+    </script>
+</body>
+</html>

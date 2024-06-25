@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        list-style: none;
+        line-height: 20px;
+      }
+
+      li::before{
+        content: "";
+        display: inline-block;
+        background-color: blue;
+        width: 7px;
+        height: 7px;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      Web 表单在 HTML 中以form元素表示，在 JavaScript 中则以 HTMLFormElement
+      类型表示。 21 HTMLFormElement 类型继承自 HTMLElement 类型，因此拥有与其他
+      HTML 元素一样的默认属性。不 过，HTMLFormElement 也有自己的属性和方法。
+      <hr />
+      <ul>
+        <li>acceptCharset:服务器可以接收的字符集，等价于 HTML 的 accept-charset
+          属性。 22  action:请求的 URL，等价于 HTML 的 action 属性。
+        </li>
+        <li>elements:表单中所有控件的 HTMLCollection。</li>
+        <li>enctype:请求的编码类型，等价于 HTML 的 enctype 属性。</li>
+        <li>length:表单中控件的数量。</li>
+        <li>method:HTTP 请求的方法类型，通常是"get"或"post"，等价于 HTML 的 method
+          属性。  name:表单的名字，等价于 HTML 的 name 属性。
+        </li>
+        <li>reset:把表单字段重置为各自的默认值。</li>
+        <li>submit:提交表单。</li>
+        <li>
+          target:用于发送请求和接收响应的窗口的名字，等价于 HTML 的 target
+          属性。
+        </li>
+      </ul>
+
+
+      <form action="#" id="form1"></form>
+      <form action="#" id="form2"></form>
+      <form action="#" id="form3"></form>
+      <script>
+
+        // 获取表单元素
+        console.log(document.getElementById("form"))   
+        // 获取所有表单元素
+        console.log(document.forms)
+      </script>
+    </div>
+  </body>
+</html>

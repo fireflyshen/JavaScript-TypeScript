@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #input1 {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+      <input type="hidden" id="input1" />
+      <input type="text" />
+
+      <!-- HTML5 为表单字段增加了 autofocus 属性，支持的浏览器会自动为带有该属性的元素设置焦点， 而无须使用 JavaScript。比如: -->
+      <input type="text" autofocus />
+    </form>
+
+    <script>
+      window.addEventListener("load", (e) => {
+        console.log("hello");
+        // document.forms[0].elements[0].focus();
+      });
+
+      // 注意，如果表单中第一个字段是 type 为"hidden"的<input>元素，或者该字段被 CSS 属性 display 或 visibility 隐藏了，以上代码就会出错
+
+      // 还有一个公共函数就是blur，用了这个函数之后表单元素会失去焦点
+    </script>
+  </body>
+</html>

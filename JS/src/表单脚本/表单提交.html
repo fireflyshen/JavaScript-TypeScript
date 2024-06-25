@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      表单是通过用户点击提交按钮或图片按钮的方式提交的。 提交按钮可以使用 type
+      属性为"submit" 的input或button元素来定义，图片按钮可以使用 type
+      属性为"image"的input元素来定义。
+      点击下面例子中定义的所有按钮都可以提交它们所在的表单:
+    </p>
+
+    <!-- 通用提交按钮 -->
+    <!-- <input type="submit" value="Submit Form"> -->
+    <!-- 自定义提交按钮 -->
+
+    <script></script>
+
+    <!-- 图片按钮 -->
+    <!-- <input type="image" src="blush.png"> -->
+    <form action="#" id="myForm">
+      <input type="text" name="" id="" />
+      <button type="submit">Submit Form</button>
+    </form>
+
+    <script>
+      // 组织表单提交
+
+      document.querySelector("myForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+      });
+    </script>
+
+    <form action="#" id="myForm2">
+      <input type="text" name="" id="" />
+      <button id="myBtn">Submit Form</button>
+    </form>
+
+    <script>
+      // 手动提交
+      document.querySelector("myBtn").addEventListener("myBtn", (e) => {
+        // 通过 submit()提交表单时，submit 事件不会触发。因此在调用这个方法前要先做数据验证。
+        document.getElementById("myForm2").submit();
+      });
+    </script>
+  </body>
+</html>

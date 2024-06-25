@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="text" name="" id=""/>
+
+<script !src="">
+
+    // 屏蔽特殊自负
+    // 需要是用正则和keypresss
+    document.querySelector("input[type=text]").addEventListener("keypress", e => {
+        console.log(e.charCode);
+        if (!/\d/.test((String.fromCharCode(e.charCode))) && e.charCode > 9){
+            e.preventDefault();
+        }
+    })
+</script>
+</body>
+</html>
