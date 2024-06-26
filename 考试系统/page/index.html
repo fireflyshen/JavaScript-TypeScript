@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="../scripts/index.js" defer></script>
+    <script type="module" src="../scripts/index.js" defer></script>
 </head>
 <body>
     
     <div id="optionContainer">
-        <input type="file" name="items" id="items" />
+        <input type="file" name="items" id="items" required/>
+        <input type="text" name="username" id="username" required>
+        <label for="username">姓名</label>
+        <button id="begin" disabled>开始考试</button>
     </div>
 
     <div id="container">
 
     </div>
 
-    <button id="btn">submit</button>
+    <button id="btn" >submit</button>
 </body>
 </html>

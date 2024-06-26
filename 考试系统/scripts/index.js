@@ -1,6 +1,12 @@
+import Paper from "./Paper.js"
+import Item from "./Item.js"
 var file = document.getElementById("items");
 var itemsContainer = [];
-var PaperContainer = [];
+var paperMap = new Map();
+let paper = null;
+/**
+ * 封装
+ */
 file.addEventListener("change", (e) => {
   // console.log("hello");
   var file = e.target.files[0];
@@ -11,8 +17,6 @@ file.addEventListener("change", (e) => {
       .split("\n")
       .map((e) => e.replace(/\r$/, ""));
     var item = new Item("", [], "", "");
-    var paper = new Paper("", [], "");
-
     items.forEach((i) => {
       if (i === "") {
         itemsContainer.push(item);
@@ -26,16 +30,29 @@ file.addEventListener("change", (e) => {
         item.options.push(i);
       }
     });
-    paper.items = itemsContainer;
-    console.log(paper);
-    dispalyItem(itemsContainer);
+    const username = document.getElementById("username");
+    var a = document.getElementById("begin");
+    a.disabled = false;
+    a.addEventListener("click", (e) => {
+      if (username.value.trim() === "") {
+        alert("请输入用户名");
+        document.getElementById("username").focus();
+      } else {
+        const paper = getPaper();
+        paper.name = document.getElementById("username").value;
+        //  触发自定义事件
+        var customEvent = new CustomEvent("examStard", { detail: paper });
+        document.dispatchEvent(customEvent);
+        dispalyItem(paper);
+      }
+    });
   };
 });
 
-function dispalyItem(items) {
+function dispalyItem(paper) {
   let content = "";
   var container = document.getElementById("container");
-  items.forEach((item, index) => {
+  paper.items.forEach((item, index) => {
     content += `
         <div class="itemContainer" data-index=${index}>
         <h3>Q ${++index}: ${item.question}</h3>
@@ -45,11 +62,11 @@ function dispalyItem(items) {
       console.log(option, index);
       content += `
             <div class="inputContainer">
-                 <input type="radio" name="options-${index}" id="option" value="${option.substring(
+                 <input type="radio" name="options-${index}" id="${option}" value="${option.substring(
         0,
         1
       )}"/>
-                 <label>${option}</lable>
+                 <label for="${option}">${option}</lable>
             </div>   
           `;
     });
@@ -72,17 +89,23 @@ function doing() {
 
 function getPaper() {
   var id = crypto.getRandomValues(new Uint16Array(1))[0];
-  const paper = new Paper(id, itemsContainer, "hello");
+  const paper = new Paper(id, itemsContainer);
   return paper;
 }
 
 function sotragePaper(paper) {
-  PaperContainer.push(paper);
-  localStorage.setItem("paper", JSON.stringify(PaperContainer));
+  if (!paperMap.has(paper.name)) {
+    paperMap.set(paper.name, []);
+    paperMap.get(paper.name).push(paper);
+  } else {
+    paperMap.get(paper.name).push(paper);
+  }
+
+  // 序列化存储
+  localStorage.setItem("paper", JSON.stringify(Array.from(paperMap)));
 }
 
 document.getElementById("btn").addEventListener("click", (e) => {
-  const paper = getPaper();
   const items = paper.items;
   console.log(typeof items);
   var count = 0;
@@ -105,118 +128,42 @@ document.getElementById("btn").addEventListener("click", (e) => {
   Array.from(inputs).forEach((e) => {
     e.disabled = true;
   });
-
-  var checkPaper = document.createElement("a")
+  var checkPaper = document.createElement("a");
   checkPaper.className = "checkPaper";
   checkPaper.href = "./listPaper.html";
+  checkPaper.innerHTML = "查看成绩";
+  checkPaper.id = "checkpaper";
+
+  document.body.appendChild(checkPaper);
+
+  document.getElementById("checkpaper").addEventListener("click", (e) => {
+    e.preventDefault();
+    const page = window.open(
+      "http://127.0.0.1:5500/%E8%80%83%E8%AF%95%E7%B3%BB%E7%BB%9F/page/listPaper.html"
+    );
+
+    var paperstr = JSON.stringify(paper);
+    page.addEventListener("load", (e) => {
+      page.postMessage(paperstr, "*");
+    });
+  });
 });
 
-class Paper {
-  constructor(paperId, items, name) {
-    this._paperId = paperId;
-    this._items = items;
-    this._name = name;
-    this._perfectScore = 100;
-    this._yourScore;
-  }
+// 创建自定义事件
+document.addEventListener("examStard", (e) => {
+  paper = e.detail;
+  console.log("考试开始？", e.detail);
+});
 
-  get items() {
-    return this._items;
-  }
+document.addEventListener("submitStart", () => {});
 
-  set items(items) {
-    this._items = items;
+window.onload = function () {
+  if (localStorage.getItem("paper") != null) {
+    console.log("发现备份");
+    let paper = localStorage.getItem("paper");
+    var map = new Map(JSON.parse(paper));
+    paperMap = map;
+  } else {
+    console.error("没有发现备份");
   }
-
-  set name(name) {
-    this._name = name;
-  }
-
-  get name() {
-    return this._name;
-  }
-
-  set paperId(paperId) {
-    this._paperId = paperId;
-  }
-
-  get paperId() {
-    return this._paperId;
-  }
-
-  set name(name) {
-    this._name = name;
-  }
-
-  get name() {
-    return this._name;
-  }
-
-  set perfectScore(perfectScore) {
-    this._perfectScore = perfectScore;
-  }
-
-  get perfectScore() {
-    return this._perfectScore;
-  }
-
-  set yourScore(yourScore) {
-    this._yourScore = yourScore;
-  }
-
-  get yourScore() {
-    return this._yourScore;
-  }
-}
-
-class Item {
-  constructor(question, options, rightAnwser, yourAnwser) {
-    this._question = question;
-    this._options = options;
-    this._rightAnwser = rightAnwser;
-    this._yourAnwser = yourAnwser;
-    this._score = 10;
-    this._isRight = true;
-  }
-
-  set question(question) {
-    this._question = question;
-  }
-
-  get question() {
-    return this._question;
-  }
-
-  set options(options) {
-    this._options = options;
-  }
-
-  get options() {
-    return this._options;
-  }
-
-  set rightAnwser(rightAnwser) {
-    this._rightAnwser = rightAnwser;
-  }
-
-  get rightAnwser() {
-    return this._rightAnwser;
-  }
-  set yourAnwser(yourAnwser) {
-    this._yourAnwser = yourAnwser;
-  }
-
-  get yourAnwser() {
-    return this._yourAnwser;
-  }
-
-  set isRight(isRight) {
-    this._isRight = isRight;
-  }
-
-  get isRight() {
-    return this._isRight;
-  }
-}
-
-var item = new Item();
+};
