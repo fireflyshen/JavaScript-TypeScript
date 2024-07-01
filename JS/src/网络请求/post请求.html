@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <form id="myform">
+        <input type="text" name="" id="title" />
+        <input type="text" name="" id="body" />
+        <input type="text" name="" id="userId" />
+        <input type="submit" value="submit">
+    </form>
+    <script>
+      function submitData() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (e) => {
+          if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+              console.log(xhr.responseText);
+            }
+          }
+        };
+
+        xhr.open("post", "https://jsonplaceholder.typicode.com/posts", false);
+        xhr.send({
+          title: "foo",
+          body: "bar",
+          userId: 1,
+        });
+      }
+
+      submitData();
+
+      function submitData2(data) {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (e) => {
+          if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+              console.log(xhr.responseText);
+            }
+          }
+        };
+
+        xhr.open("post", "https://jsonplaceholder.typicode.com/posts", false);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(data);
+      }
+
+      function serialize(form){
+        var formData = new FormData(form);
+        let data = {};
+        formData.forEach((k,v) => {
+            data[k] = v;
+        })
+
+        return data;
+      }
+    
+
+
+      document.querySelector("#myform").addEventListener("submit",e => {
+        e.preventDefault()
+        submitData2(JSON.stringify(serialize(e.target))) 
+      })
+
+
+    </script>
+  </body>
+</html>

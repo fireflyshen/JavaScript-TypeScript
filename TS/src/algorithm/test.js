@@ -1,0 +1,1 @@
+console.info(Number.isNaN(Number.parseInt("qwee")))

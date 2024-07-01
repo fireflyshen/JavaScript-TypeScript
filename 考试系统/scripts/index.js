@@ -8,7 +8,6 @@ let paper = null;
  * 封装
  */
 file.addEventListener("change", (e) => {
-  // console.log("hello");
   var file = e.target.files[0];
   var fileReader = new FileReader();
   fileReader.readAsText(file);
@@ -59,13 +58,9 @@ function dispalyItem(paper) {
         `;
     var optionsNew = item.options.filter((item) => item != "");
     optionsNew.forEach((option) => {
-      console.log(option, index);
       content += `
             <div class="inputContainer">
-                 <input type="radio" name="options-${index}" id="${option}" value="${option.substring(
-        0,
-        1
-      )}"/>
+                 <input type="radio" name="options-${index}" id="${option}" value="${option.substring(0,1)}"/>
                  <label for="${option}">${option}</lable>
             </div>   
           `;

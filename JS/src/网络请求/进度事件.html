@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //     loadstart:在接收到响应的第一个字节时触发。
+      //     progress:在接收响应期间反复触发。
+      //     error:在请求出错时触发。
+      //     abort:在调用 abort()终止连接时触发。
+      //     load:在成功接收完响应时触发。
+      //     loadend:在通信完成时，且在 error、abort 或 load 之后触发。
+      //   每次请求都会首先触发 loadstart 事件，之后是一个或多个 progress 事件，接着是 error、abort
+      //   或 load 中的一个，最后以 loadend 事件结束。 这些事件大部分都很好理解，但其中有两个需要说明一下。
+
+      // 1. **loadstart**: 这个事件在浏览器开始接收到响应的第一个字节时触发。
+      //    - **例子**: 你点击下载一个文件，下载进度条开始显示的时候，就是 `loadstart` 事件触发了。这意味着服务器已经开始发送文件数据。
+
+      // 2. **progress**: 这个事件在接收响应期间会反复触发，表示数据正在下载或上传。
+      //    - **例子**: 下载文件的过程中，下载进度条在不断增长，每次进度条更新时，都是 `progress` 事件触发了。比如，下载一个100MB的文件，每下载1MB，就会触发一次 `progress` 事件。
+
+      // 3. **error**: 这个事件在请求出错时触发，比如网络问题或服务器错误。
+      //    - **例子**: 你在浏览网页时，网络突然断了，这时候页面无法加载，并显示错误信息，这就是 `error` 事件触发了。
+
+      // 4. **abort**: 这个事件在调用 `abort()` 方法终止连接时触发。
+      //    - **例子**: 你正在下载一个大文件，但突然发现下载错了文件，于是你点击取消按钮，终止下载操作，这时 `abort` 事件会触发，表示下载被中止了。
+
+      // 5. **load**: 这个事件在成功接收完所有响应时触发。
+      //    - **例子**: 你下载一个文件，下载完成后，文件保存在你的电脑上，这时 `load` 事件触发了，表示文件已经完整下载下来。
+
+      // 6. **loadend**: 这个事件在通信完成时触发，无论是成功（`load`）、错误（`error`）还是中止（`abort`）。
+      //    - **例子**: 不管你是下载成功、出错还是取消下载，只要下载操作结束（不再进行数据传输），`loadend` 事件就会触发。比如，你开始下载一个文件，中途取消了下载，这时 `abort` 和 `loadend` 事件都会触发。
+
+      // 通过这些事件，开发者可以在不同的阶段执行相应的操作，例如显示下载进度、处理错误情况或者执行清理工作。
+
+      let xhr = new XMLHttpRequest();
+      xhr.addEventListener('loadstart', function() {
+
+        console.log("开始");
+      });
+      xhr.onprogress =  function () {
+        console.log("doing");
+      }
+      xhr.onload = function(){
+
+        // 只要是从服务器收到响应，无论状态码是什么，都会触发 load 事件。这意味着还需要检查 status
+// 属性才能确定数据是否有效。Firefox、Opera、Chrome 和 Safari 都支持 load 事件。
+        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+            console.log(xhr.responseText);
+        }
+      }
+
+      xhr.open("get","https://jsonplaceholder.typicode.com/posts",true);
+      xhr.send(null);
+    </script>
+  </body>
+</html>

@@ -1,4 +1,3 @@
-
 import Paper from './Paper.js';
 import Item from './Item.js'
 window.addEventListener("message",(e) => {

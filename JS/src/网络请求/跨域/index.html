@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let xhr = new XMLHttpRequest;
+
+        // 现代浏览器通过 XMLHttpRequest 对象原生支持 CORS。在尝试访问不同源的资源时，这个行为 会被自动触发。要向不同域的源发送请求，可以使用标准 XHR 对象并给 open()方法传入一个绝对 URL， 比如
+        xhr.onreadystatechange = function () {
+            if ((xhr.status >= 200 && xhr.status < 300)) {
+                // console.log(xhr.responseText);
+                //  getAllResponseHeaders()方法始终返回空字符串。
+                console.log(xhr.getAllResponseHeaders())
+            }
+        }
+
+        // 因为无论同域还是跨域请求都使用同一个接口，所以最好在访问本地资源时使用相对 URL，在访问
+// 远程资源时使用绝对 URL。这样可以更明确地区分使用场景，同时避免出现访问本地资源时出现头部或 cookie 信息访问受限的问题
+
+        xhr.open("get","https://baidu.com",true);
+        xhr.send(null);
+    </script>
+</body>
+</html>
