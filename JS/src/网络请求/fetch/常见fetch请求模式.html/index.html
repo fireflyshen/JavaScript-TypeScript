@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>one</button>
+    <button>two</button>
+    <button>three</button>
+    <input type="file" name="file" id="imge" />
+    <!-- <input type="image" src="./art.png" alt=""> -->
+    <script>
+      // 1. 发送 JSON 数据
+      //与 XMLHttpRequest 一样，fetch()既可以发送数据也可以接收数据。使用 init 对象参数，可以配置 fetch()在请求体中发送各种序列化的数据。
+      document
+        .querySelector("button:first-child")
+        .addEventListener("click", (params) => {
+          fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "post",
+            // 请求体
+            body: JSON.stringify({
+              en: "hello",
+            }),
+            headers: new Headers({
+              hello: "hello",
+            }),
+          });
+        });
+
+      document
+        .querySelector("button:nth-child(2)")
+        .addEventListener("click", (params) => {
+          // 2. 在请求体中发送参数
+          var username = "username",
+            password = "pass";
+          fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "post",
+            // 请求体
+            body: `username=${username}&passoword=${password}`,
+          });
+        });
+
+        // 3. 发送文件因为请求体支持 FormData 实现，所以 fetch()也可以序列化并发送文件字段中的文件
+        document.querySelector("input[type=file]").addEventListener("change",(e) => {
+            var formData = new FormData();
+            formData.append("image",e.target.files[0]);
+            fetch("https://jsonplaceholder.typicode.com/posts",{
+                body:formData,
+                method:"post"
+            })
+        })
+
+
+        // 中断请求Fetch API 支持通过 AbortController/AbortSignal 对中断请求。调用 AbortController. abort()会中断所有网络传输，特别适合希望停止传输大型负载的情况。中断进行中的 fetch()请求会 导致包含错误的拒绝。
+
+        document.querySelector("button:nth-child(3)").addEventListener("click",e => {
+          var abortController = new AbortController()
+          console.log("hello");
+          fetch("http://localhost:3000/cookie",{method:"get",signal:abortController.signal}).catch(err => {
+            console.log("请求中断")
+          })
+          setTimeout(() => {
+            abortController.abort()
+          },500)
+        })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+        fetch("http://localhost:3000",{
+          method: "get",
+          cache:"only-if-cached",
+          mode:"same-origin"
+        })
+          .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+              throw new Error("请求失败");
+            }
+            return response.text();
+          })
+          .then((e) => console.log(e))
+          .catch((e) => console.log(e));
+   
+      // 链接 https://jsonplaceholder.typicode.com/posts
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>send</button>
+    <script>
+      
+      document
+        .querySelector("button:nth-child(1)")
+        .addEventListener("click", (e) => {
+          var headers = new Headers();
+          var keepalive = true;
+          headers.append("hello","hi");
+          headers.getSetCookie().forEach(console.log);
+          fetch("http://localhost:3000/cookie", {
+            headers,
+            keepalive
+          });
+        });
+    </script>
+  </body>
+</html>
