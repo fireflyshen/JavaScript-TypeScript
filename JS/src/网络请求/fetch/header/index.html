@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button>send one</button>
+    <script>
+      document
+        .querySelector("button:nth-child(1)")
+        .addEventListener("click", (e) => {
+          // 使用构造器创建请求头
+          let headers = new Headers({
+            myheader: "myheadervalue",
+          });
+
+          // 用函数
+          headers.set("myHeader2", "myherader2");
+          var myheadervalue = headers.get("myheader");
+          console.log(myheadervalue);
+
+          // 检查
+          console.log(headers.has("myheader"));
+          // 更新
+          headers.set("myheader", "yes");
+          // 更新后获取
+          headers.get("myheader");
+
+          /// Headers 和 Map 都可以使用一个可迭代对象来初始化，比如:
+          headers = new Headers([
+            ["foo", "baz"],
+            ["quz", "qux"],
+          ]);
+
+          //   2. Headers 独有的特性
+          // Headers 并不是与 Map 处处都一样。在初始化 Headers 对象时，也可以使用键/值对形式的对象， 24而 Map 则不可以:
+          headers = new Headers({
+            foo: "bar",
+          });
+
+          // 3. 头部守卫
+          /**
+           * 某些情况下，并非所有 HTTP 头部都可以被客户端修改，而 Headers 对象使用护卫来防止不被允 许的修改。不同的护卫设置会改变 set()、append()和 delete()的行为。违反护卫限制会抛出 TypeError。
+           * Headers 实例会因来源不同而展现不同的行为，它们的行为由护卫来控制。JavaScript 可以决定 Headers 实例的护卫设置。下表列出了不同的护卫设置和每种设置对应的行为。
+           */
+          fetch("http://localhost:3000", {
+            headers,
+          }).then((res) => res.json().then(console.log));
+        });
+    </script>
+  </body>
+</html>

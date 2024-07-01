@@ -30,6 +30,7 @@ app.get("/cookie",(req,res) => {
   res.set("Access-Control-Allow-Credentials",true)
   res.cookie("token","123456");
   res.cookie("hello","你好")
+  console.log(res.cookies);
   res.send(req.cookies)
 })
 
